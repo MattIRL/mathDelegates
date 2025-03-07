@@ -2,11 +2,12 @@
 
 namespace mathDelegates
 {
-    // Declaring my custom delegate    
-    public delegate double ProductDelegate(double x, double y);
+
 
     public class MathSolutions
     {
+        // Declaring my custom delegate    
+        public delegate double ProductDelegate(double x, double y);
 
         public double GetSum(double x, double y)
         {
@@ -31,22 +32,22 @@ namespace mathDelegates
         {
             // create a class object
             MathSolutions answer = new MathSolutions();
+
             // Instatiating my custom delegate
             ProductDelegate product = new ProductDelegate(answer.GetProduct);
+
+            // Func used for GetSum
+            Func<double, double, double> calculate = answer.GetSum;
+
+            // Action delegate used for GetSmaller
+            Action<double, double> smaller = answer.GetSmaller;
 
             Random r = new Random();
             double num1 = Math.Round(r.NextDouble() * 100);
             double num2 = Math.Round(r.NextDouble() * 100);
 
-            // Func used for GetSum
-            Func<double, double, double> calculate = answer.GetSum;
             Console.WriteLine($" {num1} + {num2} = {calculate(num1, num2)}");
-
-            // Custom delegate for GetProduct
             Console.WriteLine($" {num1} * {num2} = {product(num1, num2)}");
-
-            // Action delegate used for GetSmaller
-            Action<double, double> smaller = answer.GetSmaller;
             smaller(num1, num2);
         }
     }
